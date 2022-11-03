@@ -4,7 +4,7 @@
     
     <meta name="viewport" content="width=device-width">
     <link rel="icon" href="https://blm-fsmvu.github.io/305/images/icon192.png">
-    <title>xxx </title>
+    <title> Ebrar </title>
 
   <style> /* CSS comment */
     body { max-width: 440px; }
@@ -15,7 +15,7 @@
 
 <body>   <!-- HTML comment: Modify all items marked xxx -->
 
-<h2 id="title" title="Put your name here">xxx</h2>
+<h2 id="title" title="Put your name here">Ebrar</h2>
 <p title="navigator.platform">
   Platform: <span id="plat">xxx</span>
 </p>
@@ -26,7 +26,7 @@
   Location: <span id="loc"></span>
 </p>
 <p title="Does the URL exist?">
-  URL <input type="url" id="url" value="https://maeyler.github.io/" onchange="check()"> <span id="resp">OK</span>
+  URL <input type="url" id="url" value="https://ebrarderindag.github.io/" onchange="check()"> <span id="resp">OK</span>
 </p>
 <hr>
 <b>Sample code</b>
@@ -38,20 +38,20 @@
 "use strict";
 function init() {
 //complete the code below
-    plat.innerText = 'xxx';
+    plat.innerText = navigator.userAgentData.platform;
     navigator.geolocation
       .getCurrentPosition(p =>
-        loc.innerText = 'xxx'
+        loc.innerText = (p.coords.latitude.toFixed(4) + " , " + p.coords.longitude.toFixed(4))
       );
     navigator.getBattery().then(b =>
-        lev.innerText = 'xxx'
+        lev.innerText = "%" + (b.level*100).toFixed(0)
       );
     check()
 }
 function check() {
 //complete the code below
     fetch(url.value).then(r => 
-      resp.innerText = r.ok? 'OK' : 'xxx'
+      resp.innerText = r.ok? 'Bulundu' : 'Bulunamadi'
     ).catch(e => 
       resp.innerText = e
     )
