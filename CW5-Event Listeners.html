@@ -77,8 +77,11 @@ function init() {
       online.innerText = "disconnected -- offline";
     });
 
+    window.onkeydown = (evt) => {
+      key.innerText = evt.key;
+    };
     window.onkeyup = (evt) => {
-        modifier.innerText = "";
+      key.innerText = "   ";
     };
 }
     sample.innerText = init;
