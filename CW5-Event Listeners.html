@@ -8,7 +8,9 @@
 
   <style> /* CSS comment */
     body { max-width: 440px; }
-	#online { color: rgb(160, 60, 60); }
+	#online { color: rgb(160, 60, 60); font-weight:bold;}
+  #batarya {color: rgb(0, 0, 0); font-weight: bold ; }
+  #seviye {color: rgb(0, 0, 0); font-weight: bold ; }
   </style>
 </head>
 
@@ -52,19 +54,18 @@ function init() {
     })
     
     online.innerText = (window.navigator.onLine)?
-      "connected -- online" :
-      "disconnected -- offline";
+    "connected -- online" : "disconnected -- offline";
    
     
     window.onkeydown = (evt) => {
       if(evt.ctrlKey){
-        modifier.innerText = "Ctrl +";
+        modifier.innerText = "Ctrl + ";
       }
       else if(evt.altKey ){
-        modifier.innerText = "Alt +";
+        modifier.innerText = "Alt + ";
       }
       else if(evt.shiftKey){
-        modifier.innerText = "Shift +";
+        modifier.innerText = "Shift + ";
       }
       key.innerText = evt.key;
     };
