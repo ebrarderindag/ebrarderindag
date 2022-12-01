@@ -1,0 +1,86 @@
+<html lang="en-US"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+  
+    <title>GitHub Users</title>
+    <style>
+        body {
+            max-width: 400px;
+            font-size: 19px
+            ;
+        }
+        img {
+            padding-right: 11px; 
+            width: 400px;
+            float: left;
+        }
+        pre { overflow-x: auto; }
+        #out { color: rgb(0, 0, 0); }
+      </style>
+  </head>
+  
+  <body data-new-gr-c-s-check-loaded="14.1040.0" data-gr-ext-installed="">
+  
+  <h2 id="title">GitHub Users</h2>
+  <input type="text" id="usr" value="ebrarderindag" onchange="read_user()">
+  <p id="out"><img src="https://avatars.githubusercontent.com/u/59336466?v=4" align="center"><br><b>Ebrar Derindağ</b><br>ebrarderindag<br><br>null<br><br><a href="" target="NewTab"></a></p>
+  <hr>
+<b>Sample code</b>
+<pre id=sample aria-setsize="10px"></pre>
+<hr>
+  
+  <script>
+  "use strict";
+  function error(e) {
+      out.innerText = e
+      out.style.color = 'red'
+      console.error(e)
+  }
+  async function toJSON(url) {
+    try {
+      let r = await fetch(url)
+      if (!r.ok) throw cause(r.status)
+      return r.json()
+    } catch (e) {
+      error(e)
+    }
+  }
+  async function read_user() {
+    const URL = "https://api.github.com/users/"
+      const BR = '<BR>'
+      let v = await toJSON(URL+usr.value)
+      if (!v || !v.login) return
+      out.style.color = ''
+      out.innerHTML = ''
+
+
+      out.innerHTML = `<img src="${v.avatar_url}">`
+
+      let n = (v.name || v.login).bold()
+      out.innerHTML += n+BR; console.log(n)
+
+      let user_name=v.login
+      out.innerHTML += user_name+BR; console.log(user_name)
+      out.innerHTML +="<br>"
+
+      let user_company=v.company
+      out.innerHTML += "Company: "+user_company+BR; console.log(user_company)
+
+      let loc
+      if (v.location) loc = v.location
+
+      out.innerHTML +="Location: "+loc+BR; console.log(loc)
+      
+      let h = "github.com/"+v.login
+      out.innerHTML +="Link :"+ 
+      `<a href="https://${h}" target=NewTab>${h}</a>`
+   
+  }
+      title.innerText = document.title
+      out.innerText = "Reading data"
+      read_user()
+      sample.innerText = toJSON+ ' \n ' + read_user + ' \n ' 
+  </script>
+
+  
+  </body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
