@@ -61,7 +61,9 @@
 
 <body>
     <div>
-        Lat/Lon <input id=mahal type=text value="41 29">
+        <p>Lat/Long</p>
+        <p> <input type="number" placeholder="Lat" id="enlem" value="40.97"> </p>
+        <p> <input type="number" placeholder="Long" id="boylam" value="29.05"> </p>
     </div>
 
     <canvas id="myCanvas" width="450" height="100"
@@ -89,13 +91,38 @@
             <a href="https://home.openweathermap.org/users/sign_up" target="NewTab">here</a>
         </p>
     </div>
+    <div id=map style="height: 500px; width:100%; box-sizing: border-box; border: 0;"></div>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <!-- Make sure you put JS AFTER CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <hr />
-    <div id=kod>
-        <b>Sample code</b>
-        <pre id=sample></pre>
-    </div>
+
 
     <script>
+        var MAP;
+        function init() {
+            let p = { lat: 40.95, lng: 29.12 }
+            console.log('init at', p)
+
+            MAP = L.map('map').setView(p, 10)  //setZoom(10)
+            let u = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            let attribution = '&copy; OpenStreetMap contributors'
+            L.tileLayer(u, { attribution }).addTo(MAP)
+            MAP.on('click', e => {
+                document.querySelector("#enlem").value = e.latlng.lat.toFixed(2);
+                document.querySelector("#boylam").value = e.latlng.lng.toFixed(2);
+                MAP = MAP.setView([e.latlng.lat, e.latlng.lng], 10)
+                askWeather();
+            })
+        }
+
+        function GoLocation(lat, lon) {
+            let p = { lat: lat, lng: lon }
+            MAP = MAP.setView(p, 10)  //setZoom(10)
+            let u = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            let attribution = '&copy; OpenStreetMap contributors'
+            L.tileLayer(u, { attribution }).addTo(MAP)
+        }
         "use strict";
         function toHM(t) { // t in seconds -- convert to minutes
             //number of hours since midnight, in local time
@@ -118,31 +145,13 @@
         }
         // Location
         var lat, lon;  //global values
-        async function askLocation() {
-            let name = 'geolocation'
-            let result = await navigator.permissions.query({ name })
-            if (result.state == 'denied') {
-                let url = "https://ipinfo.io/json"
-                toJSON(url).then(getLocation2, error)
-            } else {
-                navigator.geolocation
-                    .getCurrentPosition(getLocation1, error);
-            }
-        }
-        function getLocation2(p) { //Approximate
-            console.log("ipinfo.io", p.city)
-            let [x, y] = p.loc.split(',')
-            lat = Number(x); lon = Number(y);
-            askWeather()
-        }
-        function getLocation1(p) { //Accurate
-            console.log("getCurrentPosition")
-            lat = p.coords.latitude; lon = p.coords.longitude;
-            askWeather()
-        }
+
+
         // Weather
         var accessKey;
         async function askWeather() {
+            lat = document.getElementById("enlem").value
+            lon = document.getElementById("boylam").value
             console.log(lat, lon);
             const U = "https://api.openweathermap.org/data/2.5/weather?"
             let url = U + "lat=" + lat + "&lon=" + lon + "&APPID=" + accessKey;
@@ -150,7 +159,7 @@
             detay.innerText = ''
             gunes.innerText = ''
             let data = await toJSON(url)
-            fetch(url).then(r => r.json()).then(showWeather)
+            showWeather(data)
         }
         function showWeather(data) {
             let w = data.weather[0]; showIcon(w.icon)
@@ -162,13 +171,14 @@
             myCanvas.getContext("2d").fillText(hh, 150, 70);
             myCanvas.getContext("2d").fillText(yy, 150, 40);
 
+            hava.innerText = hh; yer.innerText = yy
             lat = data.coord.lat; lon = data.coord.lon
-            mahal.value = lat.toFixed(2) + ", " + lon.toFixed(2)
+            enlem.value = lat.toFixed(2); boylam.value = lon.toFixed(2);
             let wind = (3.6 * data.wind.speed).toFixed(0)
             let pres = (0.750062 * data.main.pressure).toFixed(0)
             const WIND = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N']
             let d = (data.wind.deg / 45).toFixed(0)
-            detay.innerText = hh  //+'\n'+yy +'\n['+mahal.value+"]"
+            detay.innerText = hh
                 + '\nWind  ' + wind + ' km/h ' + WIND[d]
                 + '\nPressure  ' + pres + ' mm'
                 + '\nHumidity  %' + data.main.humidity
@@ -178,6 +188,7 @@
                 + '\nSet  ' + toHM(sunset + data.timezone)
                 + '\nZone ' + (data.timezone / 3600)
             console.log(hh, yy, 'Wind ' + data.wind.deg + '° ' + WIND[d])
+            GoLocation(lat, lon);
         }
         function showIcon(i) {
             const URL = "https://openweathermap.org/img/w/"
@@ -218,17 +229,9 @@
             }
         }
         err.style.display = "none"
-        getAPIkey(); askLocation()
-        mahal.onkeyup = e => {
-            let t = e.target
-            if (e.keyCode === 13) {
-                [lat, lon] = mahal.value.split(/[ ,]+/)
-                askWeather()
-            }
-            if (e.keyCode === 27) t.blur()
-        }
+        getAPIkey(); askWeather(); init();
 
-        sample.innerText = window.onload + "\n" + showWeather + "\n" + showIcon;
+
 
 
     </script>

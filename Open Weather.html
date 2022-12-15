@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" sizes="350x350"
+        href="data:image/png;base64,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">
+    <title>Open Weather & Street Map</title>
+    <style>
+        body {
+            max-width: 450px;
+            margin: 0;
+        }
+
+        div {
+            display: inline-block;
+            margin: 12px;
+            vertical-align: top;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        b {
+            font-size: 18px;
+        }
+
+        pre {
+            font-size: 14px;
+        }
+
+        .dar {
+            width: 42%;
+        }
+
+        #main {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            background: #9cf;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        #yer {
+            margin: 10px;
+        }
+
+        #err {
+            color: red
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p>Lat/Long</p>
+        <p> <input type="number" placeholder="Lat" id="enlem" value="40.97"> </p>
+        <p> <input type="number" placeholder="Long" id="boylam" value="29.05"> </p>
+    </div>
+
+    <div id="main">
+        <p id="yer">location</p>
+        <span id="hava">weather</span>
+        </p>
+    </div>
+
+    <div class="dar">
+        <b>Detail</b>
+        <pre id="detay">detail</pre>
+    </div>
+
+    <div class="dar">
+        <b>Sun</b>
+        <pre id="gunes">sunrise</pre>
+    </div>
+    
+    <hr>
+
+    <div>
+        <p id="err" style="display: none;">You need an API key for openweathermap.org
+            <a href="https://openweathermap.org/appid" target="NewTab">here</a>
+        </p>
+    </div>
+
+    <div id=map style="height: 500px; width:100%; box-sizing: border-box; border: 0;"></div>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <!-- Make sure you put JS AFTER CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script>
+        var MAP;
+        function init() {
+            //initial coordinates are given: 50. Yil Parki
+            let p = { lat: 40.970021, lng: 29.057876 }
+            console.log('init at', p)
+            //L is global object from leaflet
+            MAP = L.map('map').setView(p, 10)  //setZoom(10)
+            let u = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            let attribution = '&copy; OpenStreetMap contributors'
+            L.tileLayer(u, { attribution }).addTo(MAP)
+            MAP.on('click', e => {
+                document.querySelector("#enlem").value = e.latlng.lat.toFixed(2);
+                document.querySelector("#boylam").value = e.latlng.lng.toFixed(2);
+                MAP = MAP.setView([e.latlng.lat, e.latlng.lng], 10)
+                askWeather();
+            })
+        }
+
+        function GoLocation(lat, lon) {
+            let p = { lat: lat, lng: lon }
+            MAP = MAP.setView(p, 10)  //setZoom(10)
+            let u = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            let attribution = '&copy; OpenStreetMap contributors'
+            L.tileLayer(u, { attribution }).addTo(MAP)
+        }
+
+        "use strict";
+        function toHM(t, round) {
+            let d = t ? new Date(t * 1000) : new Date()
+            if (round && d.getSeconds() > 29)
+                d = new Date((t + 30) * 1000) //round
+            let h = d.getHours()
+            let m = d.getMinutes()
+            let twoDigits = t => (t > 9 ? '' : '0') + t
+            return twoDigits(h) + ":" + twoDigits(m)
+        }
+
+        async function toJSON(url) {
+            let r = await fetch(url)
+            if (!r.ok) error(r.statusText)
+            return r.json()
+        }
+
+        // Location
+        var lat, lon;  //global values
+        
+        // Weather
+        var accessKey;
+        async function askWeather() {
+            lat = document.getElementById("enlem").value
+            lon = document.getElementById("boylam").value
+            console.log(lat, lon);
+            const U = "https://api.openweathermap.org/data/2.5/weather?"
+            let url = U + "lat=" + lat + "&lon=" + lon + "&APPID=" + accessKey;
+            hava.innerText = "getting weather"
+            detay.innerText = ''
+            gunes.innerText = ''
+            let data = await toJSON(url)
+            showWeather(data)
+        }
+
+        function showWeather(data) {
+            let w = data.weather[0];
+            let celsius = convert(data.main.temp).toFixed(0)
+            let hh = w.main + "  " + celsius + "°", { sys } = data
+            let yy = data.name + ', ' + sys.country
+
+            myCanvas.getContext("2d").clearRect(0, 0, myCanvas.width, myCanvas.height);
+            myCanvas.getContext("2d").fillText(hh, 150, 70);
+            myCanvas.getContext("2d").fillText(yy, 150, 40);
+            
+            hava.innerText = hh; yer.innerText = yy
+            lat = data.coord.lat; lon = data.coord.lon
+            enlem.value = lat.toFixed(2); boylam.value = lon.toFixed(2);
+            let wind = (3.6 * data.wind.speed).toFixed(0)
+            let pres = (0.750062 * data.main.pressure).toFixed(0)
+            const WIND = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW', 'N']
+            let d = (data.wind.deg / 45).toFixed(0)
+            detay.innerText = hh
+                + '\nWind  ' + wind + ' km/h ' + WIND[d]
+                + '\nPressure  ' + pres + ' mm'
+                + '\nHumidity  %' + data.main.humidity
+            let { sunrise, sunset } = sys, noon = (sunrise + sunset) / 2
+            gunes.innerText = 'Rise ' + toHM(sunrise + data.timezone)
+                + '\nNoon ' + toHM(noon + data.timezone)
+                + '\nSet  ' + toHM(sunset + data.timezone)
+                + '\nZone ' + (data.timezone / 3600)
+            console.log(hh, yy, 'Wind ' + data.wind.deg + '° ' + WIND[d])
+            GoLocation(lat, lon);
+        }
+
+        function convert(kelvin) {
+            return (kelvin - 273.15);
+            //return celsius*1.8 + 32
+        }
+
+        // Interaction
+        function askUser() {
+            let k = prompt('Please enter openweather key:')
+            if (!k) error('You need an API key')
+            return k
+        }
+
+        function error(e) {
+            main.style.display = "none"; //hide
+            //refs.style.display = "none";
+            err.style.display = ''; //show
+            throw e
+        }
+
+        function getAPIkey() {
+            if (origin.startsWith('http') && localStorage) {
+                if (!localStorage.keys) localStorage.keys = '{}'
+                let keys = JSON.parse(localStorage.keys)
+                if (!keys.openweather) {
+                    keys.openweather = askUser()
+                    localStorage.keys = JSON.stringify(keys)
+                }
+                accessKey = keys.openweather
+            } else { //cannot use localStorage
+                accessKey = askUser()
+            }
+        }
+        err.style.display = "none"
+        getAPIkey(); askWeather(); init();
+    </script>
+</body>
+
+</html>
