@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <link href="https://maeyler.github.io/JS/sss/inspector.css" rel="stylesheet" media="all">
     <script src="https://maeyler.github.io/JS/sss/inspector.js"></script>
-    <link rel="icon" href="../images/icon192.png">
+    <link rel="icon" href="images/icon192.png">
     <title>Image Inspector </title>
 
     <style>
@@ -14,21 +14,20 @@
             margin: 0;
         }
 
-        p {
+        k {
             margin: 1em;
-            font: 14px arial, sans-serif;
         }
 
         div {
             display: inline-block;
-            vertical-align: top;
         }
 
         #color {
+            display: block;
             background: #bbb;
+            font: 14px arial, sans-serif;
             text-align: center;
             padding: 16px;
-            margin: 0;
             margin-bottom: 10px;
             min-width: 260px;
         }
@@ -38,16 +37,14 @@
 <body>
     <div>
         <canvas id="canvas"></canvas>
-        <p id=color>{x,y} {R,G,B}</p>
+        <span id=color>{x,y} {R,G,B}</span>
     </div>
     <div>
         <div id=sss></div>
-        <p>Use <code>loadImage(x)</code> where x is a URL or <br>
-            number n=1: villa, n=2: field, n=3: flower
-        <p>
-            Ref: <a
+        <k>Ref: <a
                 href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas"
                 target=NewTab>Pixel manipulation</a>
+        </k>
     </div>
 
     <script>
@@ -80,7 +77,7 @@
             }
             color.style.background = rgb;
             color.style.color = avg < 127 ? "white" : "black";
-            // if (rgb == 'gray') rgb = '';
+            if (rgb == 'gray') rgb = '';
             color.innerText = '{x:' + x + ', y:' + y + '}  ' + rgb;
         }
 
@@ -90,9 +87,8 @@
                 this.canvas = canvas
                 this.context = cx
                 this.image = img
-
             }
-
+            loadImage(url) { img.src = url }
             loadImage(url) {
                 switch (Number(url)) {
                     case 1: url = "../balon.jpg"
@@ -105,6 +101,7 @@
                 }
                 img.src = url
             }
+
             invert() {
                 let id = this.context.getImageData(0, 0, this.W, this.H);
                 let data = id.data;
@@ -119,20 +116,10 @@
                 let id = this.context.getImageData(0, 0, this.W, this.H);
                 let data = id.data;
                 for (let i = 0; i < data.length; i += 4) {
-                    let avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                    var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
                     data[i] = avg; // red
                     data[i + 1] = avg; // green
                     data[i + 2] = avg; // blue
-                }
-                this.context.putImageData(id, 0, 0);
-            }
-            red_green() {
-                let id = this.context.getImageData(0, 0, this.W, this.H);
-                let data = id.data;
-                for (let i = 0; i < data.length; i += 4) {
-                    let avg = (data[i] + data[i + 1]) / 2;
-                    data[i] = avg; // red
-                    data[i + 1] = avg; // green
                 }
                 this.context.putImageData(id, 0, 0);
             }
@@ -140,20 +127,24 @@
                 return this.context.getImageData(x, y, 1, 1).data;
             }
             flipHorizontal() {
+                var imgWidth = img.width;
+                var imgHeight = img.height;
+                var imgData = this.context.getImageData(0, 0, imgWidth, imgHeight);
 
-                if (localStorage.getItem("kontrol") === "false") {
-
-                    localStorage.setItem("kontrol", "true");
-                    cx.setTransform(-1, 0, 0, 1, img.width, 0);
-
-                } else {
-                    localStorage.setItem("kontrol", "false");
-                    cx.setTransform(cx.setTransform(1, 0, 0, 1, 0, 0));
-
+                for (let i = 0; i < imgData.height; i++) {
+                    for (let j = 0; j < imgData.width / 2; j++) {
+                        var index = ((i * imgData.width) + j) * 4;
+                        var mirrorIndex = (((i + 1) * imgData.width) - (j + 1)) * 4;
+                        for (let k = 0; k < 4; k++) {
+                            var temp = imgData.data[index + k];
+                            imgData.data[index + k] = imgData.data[mirrorIndex + k];
+                            imgData.data[mirrorIndex + k] = temp;
+                        }
+                    }
                 }
-                cx.drawImage(img, 0, 0);
-
+                this.context.putImageData(imgData, 0, 0, 0, 0, imgData.width, imgData.height);
             }
+
 
         }
 
@@ -161,11 +152,12 @@
             MENU = new Graph(); //global
             display(MENU); display(cx); display(img);
             MENU.loadImage("https://blm305.github.io/2021/images/36419031.jpg");
+
         }
         canvas.addEventListener('mousemove', pick);
         try {
             inspect(sss, init); //makes Inspector table
-            inp.value = "start()";
+            inp.value = "";
         } catch (e) {
             reportError(e);
         }
