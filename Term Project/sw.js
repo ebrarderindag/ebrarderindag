@@ -1,4 +1,4 @@
-const CACHE ='Project'
+const CACHE ='Term Project'
 const FILES = ['MemoryCard.html','background.png','manifest.json','sw.js','./']
 function installCB(e) {
   e.waitUntil(
