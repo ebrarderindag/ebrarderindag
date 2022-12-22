@@ -1,0 +1,14 @@
+
+{
+    "name": "Memory Card",
+    "start_url": "MemoryCard.html",
+    "display": "standalone",
+    "background_color": "blue",
+    "icons": [
+      {
+        "src": "MemoryCard-img/background.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
