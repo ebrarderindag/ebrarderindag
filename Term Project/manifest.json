@@ -6,7 +6,7 @@
     "background_color": "blue",
     "icons": [
       {
-        "src": "MemoryCard-img/background.png",
+        "src": "background.png",
         "sizes": "512x512",
         "type": "image/png"
       }
