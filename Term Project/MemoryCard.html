@@ -218,7 +218,7 @@
     let lockBoard = false;
     let firstCard, secondCard;
     let moveCounter = 0
-    const hint_cards = document.querySelectorAll('.memory-card');;
+    const cards = document.querySelectorAll('.memory-card');;
 
 
     function flipCard() {
@@ -291,21 +291,20 @@
 
     }
     function myFunction2() {
-      let ind = Math.floor(Math.random() * hint_cards.length);
-      var card = hint_cards[ind];
-      var btn_hint = document.getElementById("hint");
+      let ind = Math.floor(Math.random() * cards.length);
+      var card = cards[ind];
 
-      for (let index = 0; index < hint_cards.length; index++) {
-        if (card.dataset.framework === hint_cards[index].dataset.framework) {
+      for (let index = 0; index < cards.length; index++) {
+        if (card.dataset.framework === cards[index].dataset.framework) {
           if (ind != index) {
             if (!(card.classList.contains('flip'))) {
               console.log("Kart bulundu");
               card.classList.add('flip');
-              hint_cards[index].classList.add('flip');
+              cards[index].classList.add('flip');
 
               setTimeout(() => {
                 card.classList.remove('flip');
-                hint_cards[index].classList.remove('flip');
+                cards[index].classList.remove('flip');
                 resetBoard();
               }, 1500);
             }else{
