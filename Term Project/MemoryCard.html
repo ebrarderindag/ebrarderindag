@@ -218,7 +218,6 @@
     let lockBoard = false;
     let firstCard, secondCard;
     let moveCounter = 0
-    const cards = document.querySelectorAll('.memory-card');;
 
 
     function flipCard() {
@@ -293,6 +292,7 @@
     function myFunction2() {
       let ind = Math.floor(Math.random() * cards.length);
       var card = cards[ind];
+      var btn_hint = document.getElementById("hint");
 
       for (let index = 0; index < cards.length; index++) {
         if (card.dataset.framework === cards[index].dataset.framework) {
