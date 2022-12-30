@@ -1,114 +1,128 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8">
 
   <title>Memory Game</title>
- 
-<style>
-   * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 
-body {
-  height: 200vh;
-  background-image: url('MemoryCard-img/background.png');         
-	background-size: cover; 
-}
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
 
-.memory-game {
-  width: 640px;
-  height: 640px;
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  perspective: 1000px;
-  padding-top: 50px;
-}
+    body {
+      height: 200vh;
+      background-image: url('MemoryCard-img/background.png');
+      background-size: cover;
+    }
 
-.memory-card {
-  width: calc(25% - 10px);
-  height: calc(33.333% - 10px);
-  margin: 5px;
-  position: relative;
-  transform: scale(1);
-  transform-style: preserve-3d;
-  transition: transform .5s;
-}
+    .memory-game {
+      width: 800px;
+      height: 800px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      perspective: 1000px;
+      padding-top: 50px;
+    }
 
-.memory-card:active {
-  transform: scale(0.97);
-  transition: transform .2s;
-}
+    .memory-card {
+      width: calc(25% - 10px);
+      height: calc(33.333% - 10px);
+      margin: 5px;
+      position: relative;
+      transform: scale(1);
+      transform-style: preserve-3d;
+      transition: transform .5s;
+    }
 
-.memory-card.flip {
-  transform: rotateY(180deg);
-}
+    .memory-card:active {
+      transform: scale(0.97);
+      transition: transform .2s;
+    }
 
-.button1 {
-  background-color: #6666bd;
-  padding: 20px 32px;
-  text-align: center;
-  font-size: 25px;
-  margin: 6px 4px;
-  font-style: italic;
-  font-stretch: expanded;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
+    .memory-card.flip {
+      transform: rotateY(180deg);
+    }
 
+    .button1 {
+      background-color: #6666bd;
+      padding: 20px 32px;
+      text-align: center;
+      font-size: 25px;
+      margin: 6px 4px;
+      font-style: italic;
+      font-stretch: expanded;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
 
-.front-face,
-.back-face {
-  width: 100%;
-  height: 100%;
-  padding: 0px;
-  position: absolute;
-  border-radius: 5px;
-  background:#4747a2;
-  backface-visibility: hidden;
-}
-
-.front-face {
-  transform: rotateY(180deg);
-}
+    .button2 {
+      background-color: #6666bd;
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 20px;
+      margin: 6px 4px;
+      font-style: italic;
+      font-stretch: expanded;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
 
 
+    .front-face,
+    .back-face {
+      width: 100%;
+      height: 100%;
+      padding: 0px;
+      position: absolute;
+      border-radius: 5px;
+      background: #4747a2;
+      backface-visibility: hidden;
+    }
 
+    .front-face {
+      transform: rotateY(180deg);
+    }
   </style>
 </head>
 
 <body>
-	
-	<div class="container">
-        <header>
-	         <h1 style="color: #1a0883; text-align: center; padding-top:50px; font-style:italic; font-stretch: expanded;
-           font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Memory Card Game</h1><br>		 
-        </header>
-	
-		 <center>
-      <label id="minutes" style= "color: #1a0883; text-align: center; padding-top:50px; font-style:italic; font-stretch: expanded;
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" >00</label> :
-      <label id="seconds" style= "color: #1a0883; text-align: center; padding-top:50px; font-style:italic; font-stretch: expanded;
+
+  <div class="container">
+    <header>
+      <h1 style="color: #1a0883; text-align: center; padding-top:50px; font-style:italic; font-size:50px; font-stretch: expanded;
+           font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+        Memory Card Game</h1><br>
+    </header>
+
+    <center>
+      <label id="minutes"
+        style="color: #1a0883; text-align: center; padding-top:50px; font-style:italic; font-size:25px; font-stretch: expanded;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">00</label> :
+      <label id="seconds"
+        style="color: #1a0883; text-align: center; padding-top:50px; font-style:italic; font-size:25px; font-stretch: expanded;
       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">00</label>
     </center>
 
-		 <center>
-      <span class="moves" style= "color: #1a0883; text-align: center; padding-top:50px; font-style:italic; font-stretch: expanded;
+    <center>
+      <span class="moves" style="color: #1a0883; text-align: center; padding-top:50px; font-style:italic; font-size:25px; font-stretch: expanded;
       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">0</span>
-      <label id="moves_lbl" style= "color: #1a0883; text-align: center; padding-top:50px; font-style:italic; font-stretch: expanded;
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Moves</label>  
+      <label id="moves_lbl"
+        style="color: #1a0883; text-align: center; padding-top:50px; font-style:italic;font-size:25px; font-stretch: expanded;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Moves</label>
     </center>
-		
-		
-	</div>
-  
+    <center> <button id="btn_hint" class="button button2" onclick="myFunction2()">Hint</button></center>
+
+
+  </div>
+
   <section class="memory-game">
     <div class="memory-card" data-framework="cinseddi">
       <img class="front-face" src="MemoryCard-img/cat1.jpeg" alt="Cat1" />
       <img class="back-face" src="MemoryCard-img/card.png" alt="card" />
-      
+
     </div>
     <div class="memory-card" data-framework="cinseddi">
       <img class="front-face" src="MemoryCard-img/cat1.jpeg" alt="Cat1" />
@@ -160,116 +174,146 @@ body {
       <img class="back-face" src="MemoryCard-img/card.png" alt="card" />
     </div>
   </section>
-  
-  		 <center> <button id="btn_restart" class="button button1" onclick="myFunction()">Restart</button></center>
-  		 <center> 
-		 <h2>Referans Link</h2>
-		 <p><a href="https://medium.com/@adamichelllle/building-a-memory-matching-game-in-javascript-48e792c7b563">Referans</a></p>
-		 </center>
-  
+
+  <center> <button id="btn_restart" class="button button1" onclick="myFunction()">Restart</button></center>
+
+  <center>
+    <h2>Referans Link</h2>
+    <p><a
+        href="https://medium.com/@adamichelllle/building-a-memory-matching-game-in-javascript-48e792c7b563">Referans</a>
+    </p>
+  </center>
 
 
-  <script> 
-  
-var minutesLabel = document.getElementById("minutes");
-var secondsLabel = document.getElementById("seconds");
-let movesContainer = document.querySelector('.moves');
 
-var totalSeconds = 0;
+  <script>
 
+    var minutesLabel = document.getElementById("minutes");
+    var secondsLabel = document.getElementById("seconds");
+    let movesContainer = document.querySelector('.moves');
 
-function setTime() {
-  ++totalSeconds;
-  secondsLabel.innerHTML = pad(totalSeconds % 60);
-  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-}
-  
-function pad(val) {
-  var valString = val + "";
-  if (valString.length < 2) {
-    return "0" + valString;
-  } else {
-    return valString;
-  }
-}  
-  
-//memory-cardların hepsini al
-const cards = document.querySelectorAll('.memory-card');
+    var totalSeconds = 0;
 
 
-let hasFlippedCard = false;
-let lockBoard = false;
-let firstCard, secondCard;
-let moveCounter=0
+    function setTime() {
+      ++totalSeconds;
+      secondsLabel.innerHTML = pad(totalSeconds % 60);
+      minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+    }
 
-function flipCard() {
-  if (lockBoard) return;
-  if (this === firstCard) return;
-  if(moveCounter==0)
-	  {
-	      t=setInterval(setTime, 1000);
-	  }
+    function pad(val) {
+      var valString = val + "";
+      if (valString.length < 2) {
+        return "0" + valString;
+      } else {
+        return valString;
+      }
+    }
 
-  //objecte flip classını ekle ve kart dönsün
-  this.classList.add('flip'); 
-  
-  	 movesContainer.textContent = ++moveCounter;
-
-  if (!hasFlippedCard) {
-    hasFlippedCard = true;
-    firstCard = this;
-
-    return;
-  }
-
-  secondCard = this;
-  checkForMatch();
-}
-
-function checkForMatch() {
-  let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-
-  isMatch ? disableCards() : unflipCards();
-}
-
-function disableCards() {
-  firstCard.removeEventListener('click', flipCard);
-  secondCard.removeEventListener('click', flipCard);
-  resetBoard();
-}
-
-function unflipCards() {
-  lockBoard = true;
-
-  setTimeout(() => {
-    firstCard.classList.remove('flip');  
-    secondCard.classList.remove('flip');
-
-    resetBoard();
-  }, 1500);
-}
-
-function resetBoard() {
-  [hasFlippedCard, lockBoard] = [false, false];
-  [firstCard, secondCard] = [null, null];
-}
-
-(function shuffle() {
-  cards.forEach(card => {
-    let randomPos = Math.floor(Math.random() * 12);
-    card.style.order = randomPos;
-  });
-})();
-
-cards.forEach(card => card.addEventListener('click', flipCard));
-
-function myFunction() {
-
-		var btn_restart = document.getElementById("restart");
-        location.reload();
-		
-}
+    //memory-cardların hepsini al
+    const cards = document.querySelectorAll('.memory-card');
 
 
-</script>
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let firstCard, secondCard;
+    let moveCounter = 0
+    const hint_cards = document.querySelectorAll('.memory-card');;
+
+
+    function flipCard() {
+      if (lockBoard) return;
+      if (this === firstCard) return;
+      if (moveCounter == 0) {
+        t = setInterval(setTime, 1000);
+      }
+
+      //objecte flip classını ekle ve kart dönsün
+      this.classList.add('flip');
+
+      movesContainer.textContent = ++moveCounter;
+
+      if (!hasFlippedCard) {
+        hasFlippedCard = true;
+        firstCard = this;
+
+        return;
+      }
+
+      secondCard = this;
+      checkForMatch();
+    }
+
+    function checkForMatch() {
+      let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
+
+      isMatch ? disableCards() : unflipCards();
+    }
+
+    function disableCards() {
+      firstCard.removeEventListener('click', flipCard);
+      secondCard.removeEventListener('click', flipCard);
+
+
+      resetBoard();
+    }
+
+    function unflipCards() {
+      lockBoard = true;
+
+      setTimeout(() => {
+        firstCard.classList.remove('flip');
+        secondCard.classList.remove('flip');
+
+        resetBoard();
+      }, 1500);
+
+    }
+
+    function resetBoard() {
+      [hasFlippedCard, lockBoard] = [false, false];
+      [firstCard, secondCard] = [null, null];
+    }
+
+    (function shuffle() {
+      cards.forEach(card => {
+        let randomPos = Math.floor(Math.random() * 12);
+        card.style.order = randomPos;
+      });
+    })();
+
+    cards.forEach(card => card.addEventListener('click', flipCard));
+
+    function myFunction() {
+
+      var btn_restart = document.getElementById("restart");
+      location.reload();
+
+    }
+    function myFunction2() {
+      let ind = Math.floor(Math.random() * hint_cards.length);
+      var card = hint_cards[ind];
+      var btn_hint = document.getElementById("hint");
+
+      for (let index = 0; index < hint_cards.length; index++) {
+        if (card.dataset.framework === hint_cards[index].dataset.framework) {
+          if (ind != index) {
+            if (!(card.classList.contains('flip'))) {
+              console.log("Kart bulundu");
+              card.classList.add('flip');
+              hint_cards[index].classList.add('flip');
+
+              setTimeout(() => {
+                card.classList.remove('flip');
+                hint_cards[index].classList.remove('flip');
+                resetBoard();
+              }, 1500);
+            }
+
+          }
+        }
+      }
+    }
+
+  </script>
 </body>
